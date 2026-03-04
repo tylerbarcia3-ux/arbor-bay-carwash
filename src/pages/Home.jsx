@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Cloud, MapPin, Navigation, Droplets, ArrowRight, Sun, CloudRain } from 'lucide-react';
 
 const Home = () => {
@@ -22,10 +23,16 @@ const Home = () => {
             <h1>Fast, Reliable Car Washing — <span>Open 24/7</span></h1>
             <p>Touchless automatic washes and self-serve bays available anytime. Professional results with state-of-the-art equipment.</p>
             <div className="hero-btns">
-              <a href="/wash-options" className="btn btn-primary">
+              <Link to="/wash-options" className="btn btn-primary">
                 View Wash Options <ArrowRight size={18} />
-              </a>
-              <a href="/location" className="btn btn-outline" style={{ border: '2px solid var(--primary)', color: 'var(--primary)' }}>
+              </Link>
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=5625+Babcock+Blvd+Pittsburgh+PA+15237"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline"
+                style={{ border: '2px solid var(--primary)', color: 'var(--primary)' }}
+              >
                 Get Directions <Navigation size={18} />
               </a>
             </div>
