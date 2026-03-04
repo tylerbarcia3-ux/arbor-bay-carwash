@@ -20,7 +20,6 @@
     - [x] Remove legacy form state and logic from frontend
     - [x] Remove backend form submission endpoint in `server/index.js`
     - [x] Remove legacy form from `Location.jsx` and replace with CTA card
-- [x] Implement SEO meta tags and optimization
-- [x] Add domain recommendations section
+- [x] Upload project to GitHub
 - [ ] Verify mobile responsiveness and performance
 - [ ] Final walkthrough and polish

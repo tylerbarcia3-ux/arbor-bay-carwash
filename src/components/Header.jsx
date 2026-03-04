@@ -12,7 +12,7 @@ const Header = () => {
     <header className="header glass-card">
       <div className="container nav-container">
         <NavLink to="/" className="logo">
-          <img src="/src/assets/logo.png" alt="Arbor Bay CarWash Logo" className="logo-img" />
+          <img src="/assets/logo.png" alt="Arbor Bay CarWash Logo" className="logo-img" />
         </NavLink>
 
         <div className="header-right">

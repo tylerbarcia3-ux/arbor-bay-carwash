@@ -32,7 +32,7 @@ const Home = () => {
           </div>
           <div className="hero-image">
             <div className="image-wrapper">
-              <img src="/src/assets/car_wash_hero.png" alt="Arbor Bay CarWash" />
+              <img src="/assets/car_wash_hero.png" alt="Arbor Bay CarWash" />
               <div className="floating-info glass-card">
                 <Droplets size={24} color="var(--primary)" />
                 <div>

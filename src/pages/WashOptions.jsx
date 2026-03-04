@@ -78,7 +78,7 @@ const WashOptions = () => {
                         </ul>
                     </div>
                     <div className="self-serve-image glass-card">
-                        <img src="/src/assets/foam_texture.png" alt="Self Serve Car Wash Foam" />
+                        <img src="/assets/foam_texture.png" alt="Self Serve Car Wash Foam" />
                         <div className="image-overlay">
                             <span>Available 24/7</span>
                         </div>
