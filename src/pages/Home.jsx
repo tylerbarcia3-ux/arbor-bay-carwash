@@ -1,0 +1,257 @@
+import React, { useEffect, useState } from 'react';
+import { Cloud, MapPin, Navigation, Droplets, ArrowRight, Sun, CloudRain } from 'lucide-react';
+
+const Home = () => {
+  const [weather, setWeather] = useState({ temp: '--', condition: 'Fetching...' });
+
+  useEffect(() => {
+    // Simulating a weather API fetch for Pittsburgh
+    const timer = setTimeout(() => {
+      setWeather({ temp: '42°F', condition: 'Partly Cloudy' });
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="home-page">
+      {/* Hero Section */}
+      <section className="hero bg-water">
+        <div className="container hero-content">
+          <div className="hero-text">
+            <div className="badge">Open 24/7 in Pittsburgh</div>
+            <h1>Fast, Reliable Car Washing — <span>Open 24/7</span></h1>
+            <p>Touchless automatic washes and self-serve bays available anytime. Professional results with state-of-the-art equipment.</p>
+            <div className="hero-btns">
+              <a href="/wash-options" className="btn btn-primary">
+                View Wash Options <ArrowRight size={18} />
+              </a>
+              <a href="/location" className="btn btn-outline" style={{ border: '2px solid var(--primary)', color: 'var(--primary)' }}>
+                Get Directions <Navigation size={18} />
+              </a>
+            </div>
+          </div>
+          <div className="hero-image">
+            <div className="image-wrapper">
+              <img src="/src/assets/car_wash_hero.png" alt="Arbor Bay CarWash" />
+              <div className="floating-info glass-card">
+                <Droplets size={24} color="var(--primary)" />
+                <div>
+                  <strong>Touchless Tech</strong>
+                  <span>Gentle on your car</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Weather & Salt Section */}
+      <section className="section bg-light">
+        <div className="container">
+          <div className="weather-banner glass-card">
+            <div className="weather-info">
+              <div className="weather-icon">
+                {weather.condition.includes('Cloud') ? <Cloud size={48} color="var(--secondary)" /> : <Sun size={48} color="#f59e0b" />}
+              </div>
+              <div>
+                <h3 id="pittsburgh-weather">Pittsburgh: {weather.temp} & {weather.condition}</h3>
+                <p>Road conditions may vary. Protect your vehicle today.</p>
+              </div>
+            </div>
+            <div className="weather-msg">
+              <p>"Bad weather? Road salt? Stop by anytime — <strong>Arbor Bay CarWash is open 24/7.</strong>"</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Support Callout Section */}
+      <section className="section bg-light">
+        <div className="container text-center">
+          <div className="support-callout glass-card">
+            <h2>Need Help With a Wash?</h2>
+            <p>If you experienced a system malfunction, were charged incorrectly, or have an issue with a wash, please contact us here so we can make it right.</p>
+            <a href="/customer-support" className="btn btn-primary btn-large">
+              File a Complaint / Request a Refund
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Info Section */}
+      <section className="section">
+        <div className="container info-grid">
+          <div className="info-card glass-card">
+            <Droplets size={32} />
+            <h3>2 Touchless Bays</h3>
+            <p>Our premium touchless automatic bays offer a high-pressure, scratch-free clean using laser-guided technology.</p>
+          </div>
+          <div className="info-card glass-card">
+            <div className="icon-group">
+              <Droplets size={32} />
+              <Droplets size={32} />
+            </div>
+            <h3>6 Self-Serve Bays</h3>
+            <p>Wash it your way with our professional-grade pressure washing equipment and specialized cleaning solutions.</p>
+          </div>
+          <div className="info-card glass-card">
+            <MapPin size={32} />
+            <h3>Prime Location</h3>
+            <p>Conveniently located at 5625 Babcock Blvd, serving Pittsburgh, Wexford, and the North Hills area.</p>
+          </div>
+        </div>
+      </section>
+
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        .hero {
+          padding: 8rem 0 4rem;
+        }
+        .hero-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          align-items: center;
+          gap: 4rem;
+        }
+        .badge {
+          display: inline-block;
+          padding: 6px 12px;
+          background: var(--primary-light);
+          color: var(--primary);
+          border-radius: 20px;
+          font-weight: 700;
+          font-size: 0.85rem;
+          margin-bottom: 1.5rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+        .hero h1 {
+          font-size: 3.5rem;
+          margin-bottom: 1.5rem;
+        }
+        .hero h1 span {
+          color: var(--secondary);
+        }
+        .hero p {
+          font-size: 1.2rem;
+          color: var(--text-light);
+          margin-bottom: 2.5rem;
+          max-width: 500px;
+        }
+        .hero-btns {
+          display: flex;
+          gap: 1.5rem;
+        }
+        .hero-image {
+          position: relative;
+        }
+        .image-wrapper {
+          position: relative;
+          border-radius: 24px;
+          overflow: hidden;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .image-wrapper img {
+          width: 100%;
+          display: block;
+        }
+        .floating-info {
+          position: absolute;
+          bottom: 20px;
+          left: 20px;
+          padding: 15px 25px;
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+        .floating-info strong {
+          display: block;
+          color: var(--primary);
+        }
+        .floating-info span {
+          font-size: 0.8rem;
+          color: var(--text-light);
+        }
+
+        .weather-banner {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 3rem;
+          gap: 2rem;
+        }
+        .weather-info {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+        .weather-msg {
+          max-width: 400px;
+          border-left: 2px solid var(--primary-light);
+          padding-left: 2rem;
+        }
+        .weather-msg p {
+          font-size: 1.1rem;
+          color: var(--text-light);
+        }
+
+        .info-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
+        }
+        .info-card {
+          padding: 3rem 2rem;
+          text-align: center;
+          transition: var(--transition);
+        }
+        .info-card:hover {
+          transform: translateY(-10px);
+        }
+        .info-card h3 {
+          margin: 1.5rem 0 1rem;
+        }
+        .info-card svg {
+          color: var(--primary);
+        }
+
+        @media (max-width: 992px) {
+          .hero-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+          }
+          .hero p {
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .hero-btns {
+            justify-content: center;
+          }
+          .weather-banner {
+            flex-direction: column;
+            text-align: center;
+          }
+          .weather-msg {
+            border-left: none;
+            border-top: 2px solid var(--primary-light);
+            padding-left: 0;
+            padding-top: 2rem;
+          }
+        }
+        @media (max-width: 768px) {
+          .hero {
+            padding: 5rem 0 3rem;
+          }
+          .hero h1 {
+            font-size: 2.5rem;
+          }
+          .info-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}} />
+    </div>
+  );
+};
+
+export default Home;
