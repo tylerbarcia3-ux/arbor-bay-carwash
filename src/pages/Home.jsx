@@ -2,15 +2,53 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Cloud, MapPin, Navigation, Droplets, ArrowRight, Sun, CloudRain } from 'lucide-react';
 
+const getWeatherLabel = (code) => {
+  if (code === 0) return 'Clear';
+  if (code >= 1 && code <= 3) return 'Cloudy';
+  if (code >= 45 && code <= 48) return 'Foggy';
+  if (code >= 51 && code <= 67) return 'Rain';
+  if (code >= 71 && code <= 77) return 'Snow';
+  if (code >= 80 && code <= 82) return 'Rain Showers';
+  if (code >= 85 && code <= 86) return 'Snow Showers';
+  if (code >= 95) return 'Thunderstorm';
+  return 'Clear';
+};
+
 const Home = () => {
-  const [weather, setWeather] = useState({ temp: '--', condition: 'Fetching...' });
+  const [weather, setWeather] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState('');
+
+  const fetchWeather = async () => {
+    setLoading(true);
+    setError(false);
+    try {
+      const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=40.4406&longitude=-79.9959&current=temperature_2m,weather_code,wind_speed_10m&temperature_unit=fahrenheit&wind_speed_unit=mph');
+      if (!response.ok) throw new Error('API Error');
+      const data = await response.json();
+      
+      const current = data.current;
+      setWeather({
+        temp: `${Math.round(current.temperature_2m)}°F`,
+        condition: getWeatherLabel(current.weather_code),
+        windSpeed: `${Math.round(current.wind_speed_10m)} mph`
+      });
+      
+      const now = new Date();
+      setLastUpdated(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    } catch (err) {
+      console.error(err);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    // Simulating a weather API fetch for Pittsburgh
-    const timer = setTimeout(() => {
-      setWeather({ temp: '42°F', condition: 'Partly Cloudy' });
-    }, 1500);
-    return () => clearTimeout(timer);
+    fetchWeather();
+    const interval = setInterval(fetchWeather, 10 * 60 * 1000); // 10 minutes
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -58,10 +96,24 @@ const Home = () => {
           <div className="weather-banner glass-card">
             <div className="weather-info">
               <div className="weather-icon">
-                {weather.condition.includes('Cloud') ? <Cloud size={48} color="var(--secondary)" /> : <Sun size={48} color="#f59e0b" />}
+                {error ? <Cloud size={48} color="var(--text-light)" /> :
+                 loading && !weather ? <Cloud size={48} color="var(--secondary)" className="weather-pulse" /> :
+                 (weather?.condition.includes('Rain') || weather?.condition.includes('Snow')) ? <CloudRain size={48} color="var(--primary)" /> :
+                 weather?.condition.includes('Cloud') ? <Cloud size={48} color="var(--secondary)" /> :
+                 <Sun size={48} color="#f59e0b" />}
               </div>
-              <div>
-                <h3 id="pittsburgh-weather">Pittsburgh: {weather.temp} & {weather.condition}</h3>
+              <div className="weather-details">
+                <h3 id="pittsburgh-weather">
+                  {error ? 'Weather unavailable' : 
+                   loading && !weather ? 'Updating weather...' : 
+                   `Pittsburgh: ${weather?.temp} & ${weather?.condition}`}
+                </h3>
+                {weather && !error && (
+                   <div className="weather-meta">
+                     Wind: {weather.windSpeed} &bull; Last updated: {lastUpdated}
+                     {loading && <span className="updating-indicator"> (Updating...)</span>}
+                   </div>
+                )}
                 <p>Road conditions may vary. Protect your vehicle today.</p>
               </div>
             </div>
@@ -255,6 +307,23 @@ const Home = () => {
           .info-grid {
             grid-template-columns: 1fr;
           }
+        }
+        @keyframes pulse-opacity {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+        .weather-pulse {
+          animation: pulse-opacity 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .weather-meta {
+          font-size: 0.9rem;
+          color: var(--text-light);
+          margin-bottom: 8px;
+        }
+        .updating-indicator {
+          font-size: 0.8rem;
+          color: var(--secondary);
+          font-style: italic;
         }
       `}} />
     </div>
