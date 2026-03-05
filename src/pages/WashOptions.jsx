@@ -2,11 +2,37 @@ import React from 'react';
 import { Check, Info, Droplets, Waves, Shield, Zap } from 'lucide-react';
 
 const packages = [
-    { name: 'Economy Wash', price: '$7', features: ['High pressure wash', 'Spot free rinse'] },
-    { name: 'Deluxe Wash', price: '$9', features: ['High pressure wash', 'Spot free rinse', 'Foam protection'] },
-    { name: 'Premium Wash', price: '$10', features: ['High pressure wash', 'Spot free rinse', 'Foam protection', 'Wheel cleaning'] },
-    { name: 'Ultimate Wash', price: '$11', features: ['High pressure wash', 'Spot free rinse', 'Foam protection', 'Triple foam', 'Bottom blast'] },
-    { name: 'Triple Foam Wash', price: '$13', features: ['High pressure wash', 'Spot free rinse', 'Foam protection', 'Premium triple foam', 'Clear coat sealant'], highlight: true, note: 'Triple Foam Wash is available in the right automatic bay only.' }
+    { 
+      name: 'Economy', 
+      price: '$7', 
+      features: ['Foam Action Cleaner', 'High Pressure Rinse', 'Low Pressure Rinse', 'Spot Free Rinse'] 
+    },
+    { 
+      name: 'Deluxe', 
+      price: '$9', 
+      features: ['Undercarriage', 'Presoak Detergent', 'Foam Action Cleaner', 'High Pressure Rinse', 'High Pressure Polish Wax', 'Spot Free Rinse', 'Dryer'] 
+    },
+    { 
+      name: 'Premium', 
+      price: '$10', 
+      features: ['Undercarriage', 'Presoak Detergent', '3X Front & Rear Foam Action Cleaner', '3X Front & Rear High Pressure Rinse', 'High Pressure Polish Wax', 'Spot Free Rinse', 'Dryer'] 
+    },
+    { 
+      name: 'Ultimate', 
+      price: '$11', 
+      features: ['Undercarriage', 'Presoak Detergent', '3X Front & Rear Foam Action Cleaner', '3X Front & Rear High Pressure Rinse', 'Clear Coat Wax', 'High Pressure Polish Wax', 'Spot Free Rinse', 'Dryer'], 
+      badge: 'Best Value',
+      highlightColor: 'var(--primary)'
+    },
+    { 
+      name: 'Triple Foam', 
+      price: '$13', 
+      features: ['Triple Foam', 'Undercarriage', 'Presoak Detergent', '3X Front & Rear Foam Action Cleaner', '3X Front & Rear High Pressure Rinse', 'Clear Coat Wax', 'High Pressure Polish Wax', 'Spot Free Rinse', 'Dryer'], 
+      badge: 'BEST WASH',
+      highlight: true, 
+      note: 'Available in Right Tunnel Only.',
+      highlightColor: 'var(--secondary)'
+    }
 ];
 
 const WashOptions = () => {
@@ -21,7 +47,14 @@ const WashOptions = () => {
 
                     <div className="pricing-grid">
                         {packages.map((pkg, index) => (
-                            <div key={index} className={`pricing-card glass-card ${pkg.highlight ? 'highlight' : ''}`}>
+                            <div key={index} 
+                                 className={`pricing-card glass-card ${pkg.highlight ? 'highlight' : ''}`}
+                                 style={pkg.highlightColor ? { borderColor: pkg.highlightColor } : {}}>
+                                {pkg.badge && (
+                                  <div className="pkg-badge" style={{ backgroundColor: pkg.highlightColor || 'var(--primary)' }}>
+                                    {pkg.badge}
+                                  </div>
+                                )}
                                 <h3>{pkg.name}</h3>
                                 <div className="price">{pkg.price}</div>
                                 <ul className="features">
@@ -106,10 +139,26 @@ const WashOptions = () => {
           transition: var(--transition);
         }
         .pricing-card:hover { transform: translateY(-5px); }
+        .pricing-card {
+          border: 2px solid transparent;
+        }
         .pricing-card.highlight {
-          border: 2px solid var(--secondary);
           transform: scale(1.05);
           position: relative;
+        }
+        .pkg-badge {
+          position: absolute;
+          top: -15px;
+          left: 50%;
+          transform: translateX(-50%);
+          color: white;
+          padding: 5px 15px;
+          border-radius: 20px;
+          font-weight: bold;
+          font-size: 0.85rem;
+          text-transform: uppercase;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+          z-index: 10;
         }
         .pricing-card.highlight:hover { transform: scale(1.05) translateY(-5px); }
         .pricing-card h3 { font-size: 1.25rem; margin-bottom: 1rem; height: 3rem; display: flex; align-items: center; }
