@@ -206,14 +206,17 @@ const Home = () => {
         }
         .hero-image {
           position: relative;
+          display: flex;
           height: 100%;
+          align-items: stretch;
         }
         .image-wrapper {
           position: relative;
+          flex: 1;
+          width: 100%;
           border-radius: 24px;
           overflow: hidden;
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-          height: 100%;
         }
         .image-wrapper img {
           width: 100%;
