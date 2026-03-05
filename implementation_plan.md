@@ -13,6 +13,11 @@ Replace the existing React-based customer support form with a clean landing sect
 - Add "Need Help / Refund Request?" card with Google Form link and mailto link.
 - Match styling with the rest of the site (blue button, mobile-friendly).
 
+#### [MODIFY] [Home.jsx](file:///Users/loganbarcia/.gemini/antigravity/brain/5bd6034a-ea64-462e-b6a1-e9ab26a44377/src/pages/Home.jsx)
+- Use `Link` component for local navigation.
+- Fix "View Wash Options" button to link to `/wash-options`.
+- Fix "Get Directions" button to link to Google Maps with proper `target` and `rel` attributes.
+
 ### [Backend] API Cleanup
 #### [MODIFY] [index.js](file:///Users/loganbarcia/.gemini/antigravity/brain/5bd6034a-ea64-462e-b6a1-e9ab26a44377/server/index.js)
 - Remove the `POST /api/support` route and all associated Resend logic.

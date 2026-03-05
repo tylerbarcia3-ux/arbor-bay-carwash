@@ -76,7 +76,8 @@ const Home = () => {
             </div>
           </div>
           <div className="hero-image">
-            <div className="image-wrapper" style={{ backgroundImage: 'url("/hero-touchless-illustration.png")' }}>
+            <div className="image-wrapper">
+              <img src="/hero-square-illustration.png" alt="Arbor Bay CarWash Touchless Illustration" />
               <div className="floating-info glass-card">
                 <Droplets size={24} color="var(--primary)" />
                 <div>
@@ -216,9 +217,16 @@ const Home = () => {
           border-radius: 24px;
           overflow: hidden;
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
+        }
+        .image-wrapper img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          margin: 0;
+          padding: 0;
         }
         .floating-info {
           position: absolute;

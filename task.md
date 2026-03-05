@@ -21,5 +21,9 @@
     - [x] Remove backend form submission endpoint in `server/index.js`
     - [x] Remove legacy form from `Location.jsx` and replace with CTA card
 - [x] Upload project to GitHub
-- [ ] Verify mobile responsiveness and performance
-- [ ] Final walkthrough and polish
+- [x] Fix production asset handling (move to public folder)
+- [x] Fix hero section buttons on Home page
+    - [x] Link "View Wash Options" to `/wash-options` using `Link`
+    - [x] Link "Get Directions" to Google Maps (new tab)
+- [x] Verify mobile responsiveness and performance
+- [x] Final walkthrough and polish

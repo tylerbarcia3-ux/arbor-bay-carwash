@@ -10,8 +10,8 @@ The Arbor Bay CarWash website is now complete! It features a modern, professiona
 - Subtle water and foam visual effects.
 
 ### 🏠 Dynamic Home Page
-![Arbor Bay Home Page](/Users/loganbarcia/.gemini/antigravity/brain/5bd6034a-ea64-462e-b6a1-e9ab26a44377/home_page_1772654866416.png)
-- **Hero Section**: Strong call-to-action with primary and secondary buttons.
+- **Hero Section Navigation**: Fixed hero buttons to properly navigate to Wash Options and open Google Maps for directions. (Note: Fixed CSS overlay issue to ensure interactivity).
+![Homepage Hero](/Users/loganbarcia/.gemini/antigravity/brain/5bd6034a-ea64-462e-b6a1-e9ab26a44377/homepage_initial_1772668368943.png)
 - **Weather Widget**: Real-time mockup showing Pittsburgh conditions to remind customers about road salt protection.
 - **Mobile Optimized**: Designed to be thumb-friendly and easy to read on small screens.
 
@@ -38,6 +38,8 @@ The Arbor Bay CarWash website is now complete! It features a modern, professiona
 - **Tech Stack**: Vite + React + Vanilla CSS.
 - **Backend Infrastructure**: Lightweight Node.js Express server for development and health checks.
 - **Secure Integration**: Leveraging Google Forms for robust external data collection without requiring internal API maintenance.
+- **Production Asset Handling**: All images (Logo, Hero, Icons) migrated to the `/public` directory to ensure reliability across all environments, including Vercel.
+- **Vite Optimized**: References updated to root-relative paths (`/assets/...`) for seamless production builds.
 - **Icons**: Lucide-React for crisp, professional visuals.
 - **SEO**: Meta tags and optimized titles for local car wash keywords.
 
