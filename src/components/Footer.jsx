@@ -58,9 +58,11 @@ const Footer = () => {
           margin-top: 1rem;
           color: var(--text-light);
         }
-        .footer-logo {
-          height: 50px;
-          width: auto;
+        .footer-logo { 
+            height: auto; 
+            width: 220px; 
+            margin-bottom: 1.5rem; 
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5)); /* Protect logo visibility on dark backgrounds */
         }
         .footer-links ul li {
           margin-bottom: 0.8rem;
