@@ -169,8 +169,11 @@ const Home = () => {
         .hero-content {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          align-items: center;
+          align-items: stretch;
           gap: 4rem;
+        }
+        .hero-text {
+          align-self: center;
         }
         .badge {
           display: inline-block;
@@ -283,6 +286,9 @@ const Home = () => {
           .hero-content {
             grid-template-columns: 1fr;
             text-align: center;
+          }
+          .hero-image {
+            min-height: 350px;
           }
           .hero p {
             margin-left: auto;
