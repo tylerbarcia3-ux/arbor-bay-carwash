@@ -203,15 +203,20 @@ const Home = () => {
         }
         .hero-image {
           position: relative;
+          height: 100%;
         }
         .image-wrapper {
           position: relative;
           border-radius: 24px;
           overflow: hidden;
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+          height: 100%;
         }
         .image-wrapper img {
           width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
           display: block;
         }
         .floating-info {
