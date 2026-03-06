@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container footer-grid">
         <div className="footer-info">
           <div className="logo">
-            <img src="/assets/logo.png" alt="Arbor Bay CarWash" className="footer-logo" />
+            <img src="/assets/new-logo.png" alt="Arbor Bay CarWash" className="footer-logo" />
           </div>
           <p>Professional touchless and self-serve car washing in the heart of Pittsburgh. Available 24/7 for your convenience.</p>
         </div>

@@ -12,7 +12,7 @@ const Header = () => {
     <header className="header glass-card">
       <div className="container nav-container">
         <NavLink to="/" className="logo">
-          <img src="/assets/logo.png" alt="Arbor Bay CarWash Logo" className="logo-img" />
+          <img src="/assets/new-logo.png" alt="Arbor Bay CarWash Logo" className="logo-img" />
         </NavLink>
 
         <div className="header-right">
@@ -66,8 +66,8 @@ const Header = () => {
           color: var(--primary);
         }
         .logo-img {
-          height: 60px;
-          width: auto;
+          height: auto;
+          width: 200px;
           display: block;
         }
         .nav-menu {
