@@ -1,37 +1,47 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Droplets, Menu, X, Mail } from 'lucide-react';
-import { CONFIG } from '../config';
+import React, { useState, useEffect } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="header glass-card">
+    <header className={`header ${scrolled ? "scrolled" : ""}`}>
       <div className="container nav-container">
         <NavLink to="/" className="logo">
           <img src="/assets/new-logo.png" alt="Arbor Bay CarWash Logo" className="logo-img" />
         </NavLink>
 
-        <div className="header-right">
-          <a href={`mailto:${CONFIG.SUPPORT_EMAIL}`} className="header-email">
-            <Mail size={16} />
-            <span>Support: {CONFIG.SUPPORT_EMAIL}</span>
-          </a>
-          <button className="mobile-toggle" onClick={toggleMenu}>
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        <nav className={`nav-menu ${isOpen ? 'active' : ''}`}>
+        <nav className={`nav-menu ${isOpen ? "active" : ""}`}>
           <NavLink to="/" onClick={() => setIsOpen(false)}>Home</NavLink>
           <NavLink to="/wash-options" onClick={() => setIsOpen(false)}>Wash Options</NavLink>
           <NavLink to="/location" onClick={() => setIsOpen(false)}>Location</NavLink>
           <NavLink to="/about" onClick={() => setIsOpen(false)}>About Us</NavLink>
-          <NavLink to="/customer-support" onClick={() => setIsOpen(false)} className="btn-support">Customer Support</NavLink>
+          
+          <div className="mobile-cta d-mobile-only">
+             <Link to="/customer-support" onClick={() => setIsOpen(false)} className="btn btn-primary">Customer Support</Link>
+          </div>
         </nav>
+
+        <div className="header-right">
+           <div className="desktop-cta d-desktop-only">
+             <Link to="/customer-support" className="btn btn-primary">Customer Support</Link>
+           </div>
+          <button className="mobile-toggle" onClick={toggleMenu} aria-label="Toggle menu">
+            {isOpen ? <X size={28} color="var(--white)" /> : <Menu size={28} color="var(--white)" />}
+          </button>
+        </div>
       </div>
 
       <style dangerouslySetInnerHTML={{
@@ -40,94 +50,129 @@ const Header = () => {
           position: sticky;
           top: 0;
           z-index: 1000;
-          padding: 1rem 0;
-          margin: 1rem 1rem 0 1rem;
-          border-radius: 12px;
+          padding: 1.25rem 0;
+          background-color: var(--bg-dark);
+          transition: var(--transition);
+          border-bottom: 1px solid rgba(255,255,255,0.05);
         }
+        
+        .header.scrolled {
+          padding: 0.75rem 0;
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          background-color: rgba(13, 23, 16, 0.95);
+          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
         .nav-container {
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
+
+        .logo-img {
+          height: auto;
+          width: 220px;
+          display: block;
+          transition: var(--transition);
+        }
+
+        .header.scrolled .logo-img {
+          width: 180px;
+        }
+
+        .nav-menu {
+          display: flex;
+          gap: 2.5rem;
+          align-items: center;
+        }
+
+        .nav-menu a:not(.btn) {
+          font-family: "Plus Jakarta Sans", sans-serif;
+          font-weight: 600;
+          color: rgba(255,255,255,0.8);
+          font-size: 1.05rem;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          position: relative;
+        }
+
+        .nav-menu a:not(.btn)::after {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 2px;
+          background: var(--secondary);
+          bottom: -4px;
+          left: 0;
+          transition: width 0.3s ease;
+        }
+
+        .nav-menu a:not(.btn):hover, .nav-menu a.active:not(.btn) {
+          color: var(--white);
+        }
+
+        .nav-menu a.active:not(.btn)::after, .nav-menu a:not(.btn):hover::after {
+          width: 100%;
+        }
+
         .header-right {
           display: flex;
           align-items: center;
-          gap: 2rem;
+          gap: 1.5rem;
         }
-        .header-email {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          color: var(--text-light);
+
+        .desktop-cta .btn {
+          padding: 10px 20px;
           font-size: 0.9rem;
-          font-weight: 500;
         }
-        .header-email:hover {
-          color: var(--primary);
-        }
-        .logo-img {
-          height: auto;
-          width: 200px;
-          display: block;
-        }
-        .nav-menu {
-          display: flex;
-          gap: 2rem;
-        }
-        .nav-menu a {
-          font-weight: 600;
-          color: var(--text-light);
-        }
-        .nav-menu a:hover, .nav-menu a.active {
-          color: var(--primary);
-        }
-        .btn-support {
-          background: var(--primary);
-          color: var(--white) !important;
-          padding: 8px 16px !important;
-          border-radius: 6px;
-          transition: var(--transition);
-        }
-        .btn-support:hover {
-          background: var(--secondary);
-          transform: translateY(-2px);
-        }
+
         .mobile-toggle {
           display: none;
-          color: var(--primary);
+        }
+        
+        .d-mobile-only {
+          display: none;
+        }
+
+        @media (max-width: 992px) {
+          .nav-menu { gap: 1.5rem; }
+          .logo-img { width: 180px; }
+          .desktop-cta .btn { padding: 8px 16px; font-size: 0.85rem; }
         }
 
         @media (max-width: 768px) {
           .mobile-toggle {
             display: block;
           }
+          .d-desktop-only { display: none; }
+          .d-mobile-only { display: block; margin-top: 1rem; width: 100%; }
+          .d-mobile-only .btn { width: 100%; }
+          
           .nav-menu {
             position: absolute;
-            top: 70px;
+            top: 100%;
             left: 0;
-            right: 0;
+            width: 100%;
             flex-direction: column;
-            background: var(--white);
+            background: var(--bg-dark);
             padding: 2rem;
             gap: 1.5rem;
-            transform: translateY(-20px);
+            transform: translateY(-10px);
             opacity: 0;
-            pointer-events: none;
+            visibility: hidden;
             transition: var(--transition);
-            box-shadow: var(--shadow);
-            border-bottom-left-radius: 16px;
-            border-bottom-right-radius: 16px;
+            border-bottom: 2px solid var(--primary);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.5);
           }
+
           .nav-menu.active {
             transform: translateY(0);
             opacity: 1;
-            pointer-events: all;
-          }
-          .header-email {
-            display: none;
+            visibility: visible;
           }
         }
-      `}} />
+        `}} />
     </header>
   );
 };

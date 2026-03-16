@@ -1,99 +1,136 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Droplets, MapPin, Clock, Mail } from 'lucide-react';
-import { CONFIG } from '../config';
+import React from "react";
+import { Link } from "react-router-dom";
+import { MapPin, Clock, Mail } from "lucide-react";
+import { CONFIG } from "../config";
 
 const Footer = () => {
   return (
-    <footer className="footer section">
+    <footer className="footer bg-dark">
       <div className="container footer-grid">
-        <div className="footer-info">
-          <div className="logo">
-            <img src="/assets/new-logo.png" alt="Arbor Bay CarWash" className="footer-logo" />
-          </div>
-          <p>Professional touchless and self-serve car washing in the heart of Pittsburgh. Available 24/7 for your convenience.</p>
+        <div className="footer-brand fade-in">
+          <img src="/assets/new-logo.png" alt="Arbor Bay CarWash Logo" className="footer-logo" />
+          <p className="brand-desc">Professional touchless and self-serve car washing in the heart of Pittsburgh. Available 24/7 for a premium clean.</p>
         </div>
 
-        <div className="footer-links">
-          <h4>Quick Links</h4>
+        <div className="footer-links fade-in delay-1">
+          <h3>Quick Links</h3>
           <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/wash-options">Wash Options</a></li>
-            <li><a href="/location">Location</a></li>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/customer-support">Customer Support / Refund Help</a></li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/wash-options">Wash Options</Link></li>
+            <li><Link to="/location">Location</Link></li>
+            <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/customer-support">Customer Support</Link></li>
           </ul>
         </div>
 
-        <div className="footer-contact">
-          <h4>Customer Support</h4>
+        <div className="footer-contact fade-in delay-2">
+          <h3>Contact Us</h3>
           <ul>
-            <li><Mail size={18} /> <a href={`mailto:${CONFIG.SUPPORT_EMAIL}`}>{CONFIG.SUPPORT_EMAIL}</a></li>
-            <li><Clock size={18} /> Open 24 Hours / 7 Days</li>
+            <li>
+              <Mail size={18} color="var(--secondary)" /> 
+              <a href={`mailto:${CONFIG.SUPPORT_EMAIL}`}>{CONFIG.SUPPORT_EMAIL}</a>
+            </li>
+            <li>
+              <MapPin size={18} color="var(--secondary)" />
+              <a href="https://www.google.com/maps/dir//5625+Babcock+Blvd,+Pittsburgh,+PA+15237" target="_blank" rel="noopener noreferrer">5625 Babcock Blvd, Pittsburgh, PA</a>
+            </li>
+            <li>
+              <Clock size={18} color="var(--secondary)" /> 
+              <span>Open 24 Hours / 7 Days</span>
+            </li>
           </ul>
-          <div style={{ marginTop: '1.5rem' }}>
-            <Link to="/customer-support" className="btn btn-primary" style={{ fontSize: '0.85rem', padding: '10px 15px' }}>
-              File a Complaint / Request a Refund
-            </Link>
-          </div>
         </div>
       </div>
+      
       <div className="footer-bottom container">
-        <p>&copy; {new Date().getFullYear()} Arbor Bay CarWash. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Arbor Bay Car Wash. All rights reserved.</p>
       </div>
 
       <style dangerouslySetInnerHTML={{
         __html: `
         .footer {
-          background: var(--white);
-          padding: 4rem 0 2rem;
-          margin-top: 4rem;
-          border-top: 1px solid var(--primary-light);
+          padding: 6rem 0 2rem;
+          border-top: 4px solid var(--primary);
         }
+        
         .footer-grid {
           display: grid;
           grid-template-columns: 2fr 1fr 1.5fr;
-          gap: 3rem;
+          gap: 4rem;
         }
-        .footer-info p {
-          margin-top: 1rem;
-          color: var(--text-light);
-        }
+
         .footer-logo { 
-            height: auto; 
-            width: 220px; 
-            margin-bottom: 1.5rem; 
-            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5)); /* Protect logo visibility on dark backgrounds */
+          width: 240px; 
+          margin-bottom: 1.5rem; 
         }
+
+        .brand-desc {
+          color: rgba(255,255,255,0.7);
+          font-size: 1.05rem;
+          max-width: 400px;
+        }
+
+        .footer h3 {
+          color: var(--white);
+          margin-bottom: 1.5rem;
+          font-size: 1.5rem;
+        }
+
         .footer-links ul li {
-          margin-bottom: 0.8rem;
+          margin-bottom: 1rem;
         }
+
         .footer-links a {
-          color: var(--text-light);
+          color: rgba(255,255,255,0.7);
+          font-weight: 500;
+          display: inline-block;
         }
+
         .footer-links a:hover {
-          color: var(--primary);
+          color: var(--secondary);
+          transform: translateX(5px);
         }
+
         .footer-contact ul li {
           display: flex;
-          align-items: center;
-          gap: 10px;
-          margin-bottom: 1rem;
-          color: var(--text-light);
+          align-items: flex-start;
+          gap: 12px;
+          margin-bottom: 1.25rem;
+          color: rgba(255,255,255,0.7);
         }
+
+        .footer-contact a {
+          color: rgba(255,255,255,0.7);
+        }
+        
+        .footer-contact a:hover {
+          color: var(--white);
+        }
+
         .footer-bottom {
-          margin-top: 3rem;
+          margin-top: 4rem;
           padding-top: 2rem;
-          border-top: 1px solid #eee;
+          border-top: 1px solid rgba(255,255,255,0.1);
           text-align: center;
+          color: rgba(255,255,255,0.5);
           font-size: 0.9rem;
-          color: var(--text-light);
+        }
+
+        @media (max-width: 992px) {
+          .footer-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+          }
+          .footer-brand {
+            grid-column: 1 / -1;
+          }
         }
 
         @media (max-width: 768px) {
+          .footer { padding: 4rem 0 2rem; }
           .footer-grid {
             grid-template-columns: 1fr;
-            gap: 2rem;
+            gap: 2.5rem;
           }
         }
       `}} />
