@@ -130,9 +130,9 @@ const Home = () => {
           <div className="support-callout glass-card">
             <h2>Need Help With a Wash?</h2>
             <p>If you experienced a system malfunction, were charged incorrectly, or have an issue with a wash, please contact us here so we can make it right.</p>
-            <a href="/customer-support" className="btn btn-primary btn-large">
+            <Link to="/customer-support" className="btn btn-primary btn-large">
               File a Complaint / Request a Refund
-            </a>
+            </Link>
           </div>
         </div>
       </section>

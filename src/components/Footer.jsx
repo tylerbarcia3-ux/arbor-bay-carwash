@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Droplets, MapPin, Clock, Mail } from 'lucide-react';
 import { CONFIG } from '../config';
 
@@ -31,9 +32,9 @@ const Footer = () => {
             <li><Clock size={18} /> Open 24 Hours / 7 Days</li>
           </ul>
           <div style={{ marginTop: '1.5rem' }}>
-            <a href="/customer-support" className="btn btn-primary" style={{ fontSize: '0.85rem', padding: '10px 15px' }}>
+            <Link to="/customer-support" className="btn btn-primary" style={{ fontSize: '0.85rem', padding: '10px 15px' }}>
               File a Complaint / Request a Refund
-            </a>
+            </Link>
           </div>
         </div>
       </div>
