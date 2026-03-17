@@ -51,64 +51,29 @@ const CustomerSupport = () => {
 
       {/* Contact Section */}
       <section className="section contact-section bg-dark fade-in delay-1">
-        <div className="container contact-grid">
-           <div className="contact-info">
-             <h2>Get in Touch</h2>
-             <p className="subtitle">Send us a direct message or file a report, and our management team will reach out as soon as possible.</p>
-             
-             <div className="info-cards">
-                <div className="info-card glass-card">
-                   <Mail size={32} color="var(--secondary)" className="mb-3" />
-                   <h3>Email Us</h3>
-                   <p>For general inquiries or support</p>
-                   <a href={`mailto:${CONFIG.SUPPORT_EMAIL}`} className="contact-link">{CONFIG.SUPPORT_EMAIL}</a>
-                </div>
-                
-                <div className="info-card glass-card">
-                   <MessageSquare size={32} color="var(--secondary)" className="mb-3" />
-                   <h3>Response Time</h3>
-                   <p>We typically respond to all inquiries within <strong>24-48 business hours</strong>.</p>
-                </div>
-             </div>
-           </div>
-
-           <div className="contact-form-container glass-card">
-              <h3>Send a Message</h3>
-              <form className="contact-form" onSubmit={(e) => { e.preventDefault(); alert("Form submitted (Demo)"); }}>
-                 <div className="form-group">
-                    <label>Full Name</label>
-                    <input type="text" placeholder="John Doe" required />
-                 </div>
-                 
-                 <div className="form-group">
-                    <label>Email Address</label>
-                    <input type="email" placeholder="john@example.com" required />
-                 </div>
-
-                 <div className="form-group">
-                    <label>Subject</label>
-                    <select required>
-                       <option value="">Select a topic...</option>
-                       <option value="refund">Request a Refund</option>
-                       <option value="complaint">File a Complaint</option>
-                       <option value="question">General Question</option>
-                       <option value="feedback">Feedback</option>
-                    </select>
-                 </div>
-                 
-                 <div className="form-group">
-                    <label>Message</label>
-                    <textarea rows="5" placeholder="How can we help you?" required></textarea>
-                 </div>
-                 
-                 <button type="submit" className="btn btn-secondary w-100 mt-2">Submit Request</button>
-              </form>
-
-              <div className="mt-4 pt-4 border-top text-center">
-                 <p className="text-sm mb-3 text-light">Or use our external standard form:</p>
-                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSeQ0E2t8m8kQ6_YwT7V29y8s76Z1O81I/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer" className="btn btn-outline w-100">
-                    Google Request Form <ExternalLink size={16} />
+        <div className="container">
+           <div className="support-cards-grid">
+              {/* Card 1: Email Support */}
+              <div className="support-card glass-card text-center">
+                 <Mail size={40} color="var(--secondary)" className="mx-auto mb-3" />
+                 <h3>Email Us</h3>
+                 <a href={`mailto:${CONFIG.SUPPORT_EMAIL}`} className="contact-link mb-3">{CONFIG.SUPPORT_EMAIL}</a>
+                 <p className="text-light">For general inquiries or support, email us directly.</p>
+              </div>
+              
+              {/* Card 2: Google Form */}
+              <div className="support-card glass-card text-center">
+                 <MessageSquare size={40} color="var(--secondary)" className="mx-auto mb-3" />
+                 <h3>File a Complaint / Request a Refund</h3>
+                 <a 
+                   href="https://docs.google.com/forms/d/e/1FAIpQLSe8R4brvq_9-vMC8WMN1ZxJqaTpHXQVQtgsS4q9_R1wB-xeGg/viewform" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   className="btn btn-secondary w-100 mb-3"
+                 >
+                    Open Support Form <ExternalLink size={16} className="ml-2 inline-icon" />
                  </a>
+                 <p className="text-light text-sm">All wash issues, refunds, or system problems should be submitted through this form.</p>
               </div>
            </div>
         </div>
@@ -150,63 +115,43 @@ const CustomerSupport = () => {
 
         .contact-section { padding: 5rem 0 8rem; position: relative; }
         
-        .contact-grid {
+        .support-cards-grid {
            display: grid;
-           grid-template-columns: 1fr 1.2fr;
-           gap: 4rem;
-           align-items: start;
+           grid-template-columns: 1fr 1fr;
+           gap: 2rem;
+           max-width: 900px;
+           margin: 0 auto;
         }
 
-        .contact-info h2 { font-size: 3.5rem; margin-bottom: 1rem; color: var(--white); }
-        .contact-info .subtitle { font-size: 1.15rem; color: rgba(255,255,255,0.7); margin-bottom: 3rem; line-height: 1.6; }
-
-        .info-cards { display: grid; gap: 1.5rem; }
-        .info-card { padding: 2rem; border-radius: 12px; }
-        .info-card h3 { font-size: 1.5rem; color: var(--white); margin-bottom: 0.5rem; }
-        .info-card p { color: rgba(255,255,255,0.6); margin-bottom: 1rem; }
+        .support-card { 
+           padding: 3rem 2rem; 
+           border-radius: 16px; 
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+        }
+        .support-card h3 { font-size: 1.75rem; color: var(--white); margin-bottom: 1rem; }
+        
         .mb-3 { margin-bottom: 1rem; }
-        .mt-2 { margin-top: 0.5rem; }
-        .mt-4 { margin-top: 1.5rem; }
-        .pt-4 { padding-top: 1.5rem; }
-        .border-top { border-top: 1px solid rgba(255,255,255,0.1); }
         .text-sm { font-size: 0.9rem; }
-        .text-light { color: rgba(255,255,255,0.6); }
+        .text-light { color: rgba(255,255,255,0.7); line-height: 1.6; }
+        .text-center { text-align: center; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .w-100 { width: 100%; }
+        .inline-icon { display: inline-block; vertical-align: middle; margin-left: 8px; margin-top: -2px; }
 
         .contact-link {
            color: var(--white);
            font-weight: 700;
-           font-size: 1.1rem;
+           font-size: 1.2rem;
            border-bottom: 2px solid var(--secondary);
            display: inline-block;
+           align-self: center;
         }
         .contact-link:hover { color: var(--secondary); border-color: var(--white); }
 
-        .contact-form-container { padding: 3rem 2.5rem; border-radius: 16px; }
-        .contact-form-container h3 { font-size: 2rem; color: var(--white); margin-bottom: 2rem; }
-
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; color: rgba(255,255,255,0.8); margin-bottom: 8px; font-weight: 500; font-size: 0.95rem; }
-        .form-group input, .form-group select, .form-group textarea {
-           width: 100%;
-           background: rgba(255,255,255,0.05);
-           border: 1px solid rgba(255,255,255,0.1);
-           border-radius: 8px;
-           padding: 12px 16px;
-           color: var(--white);
-           font-size: 1rem;
-           transition: var(--transition);
-        }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-           outline: none;
-           border-color: var(--secondary);
-           background: rgba(255,255,255,0.08);
-           box-shadow: 0 0 0 3px rgba(0,191,255,0.1);
-        }
-        .form-group option { background: var(--bg-dark); color: var(--white); }
-
         /* FAQ Section */
         .text-dark { color: var(--text-dark); }
-        .mx-auto { margin-left: auto; margin-right: auto; }
         .mb-4 { margin-bottom: 2rem; }
         
         .faq-section { padding: 6rem 0; }
@@ -252,13 +197,8 @@ const CustomerSupport = () => {
            font-size: 1.05rem;
         }
 
-        @media (max-width: 992px) {
-           .contact-grid { grid-template-columns: 1fr; }
-           .info-cards { grid-template-columns: 1fr 1fr; }
-        }
         @media (max-width: 768px) {
-           .info-cards { grid-template-columns: 1fr; }
-           .contact-form-container { padding: 2rem 1.5rem; }
+           .support-cards-grid { grid-template-columns: 1fr; }
         }
       `}} />
     </div>
